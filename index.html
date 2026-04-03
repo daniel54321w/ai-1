@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>אי של אמון — ביקורות אמיתיות על כלי AI לעסקים ישראליים</title>
+  <meta name="description" content="הפלטפורמה הישראלית היחידה לביקורות מאומתות על כלי AI. כל ביקורת מגובה בהוכחת שימוש ופרופיל LinkedIn אמיתי." />
+  <meta property="og:title" content="אי של אמון" />
+  <meta property="og:description" content="ביקורות אמיתיות על כלי AI לעסקים בישראל" />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Heebo', 'sans-serif'] },
+          colors: {
+            navy:  { DEFAULT: '#0f2547', light: '#1a3a6e', muted: '#3d5a8a' },
+            trust: { DEFAULT: '#0ea5e9', light: '#e0f2fe' },
+            gold:  { DEFAULT: '#f59e0b', light: '#fef3c7' },
+            sage:  { DEFAULT: '#10b981', light: '#d1fae5' },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Heebo', sans-serif; }
+    .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(15,37,71,.12); }
+    .skeleton { background: linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  </style>
+</head>
+<body class="bg-slate-50 text-gray-800 antialiased">
+
+  <nav class="bg-navy text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2">
+        <span class="text-2xl">🏝️</span>
+        <div>
+          <span class="text-xl font-bold tracking-tight">אי של אמון</span>
+          <span class="hidden sm:block text-xs text-blue-300 leading-none">כלי AI לעסקים ישראליים</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="#tools" class="text-sm text-blue-200 hover:text-white transition-colors hidden sm:block">כל הכלים</a>
+        <a href="#" class="bg-trust text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-sky-400 transition-colors">הוסף ביקורת</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="bg-gradient-to-bl from-navy via-navy-light to-[#0f3460] text-white py-20 px-4 text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image:radial-gradient(circle at 2px 2px,white 1px,transparent 0);background-size:32px 32px;"></div>
+    <div class="relative max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 text-sm text-blue-200 mb-6">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        כל ביקורת מאומתת עם הוכחת שימוש אמיתית
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
+        הביקורות ה<span class="text-trust">אמיתיות</span><br />על כלי AI לעסקים בישראל
+      </h1>
+      <p class="text-lg sm:text-xl text-blue-200 max-w-xl mx-auto mb-10 leading-relaxed">
+        לא עוד שיווק ריק. כאן תמצאו חוות דעת של בעלי עסקים ישראליים שמשתמשים בכלי ה-AI בפועל — מגובות בצילום מסך ופרופיל LinkedIn.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="#tools" class="bg-trust hover:bg-sky-400 text-white font-bold px-8 py-3.5 rounded-xl transition-colors text-lg shadow-lg shadow-sky-900/30">גלה כלים מובילים ↓</a>
+        <a href="#" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-8 py-3.5 rounded-xl transition-colors text-lg">איך זה עובד?</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white border-b border-gray-100">
+    <div class="max-w-5xl mx-auto px-4 py-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="flex items-center gap-3 p-4 rounded-xl bg-green-50">
+        <span class="text-3xl">✅</span>
+        <div><div class="font-bold text-gray-800">ביקורות מאומתות בלבד</div><div class="text-sm text-gray-500">הוכחת שימוש + LinkedIn חובה</div></div>
+      </div>
+      <div class="flex items-center gap-3 p-4 rounded-xl bg-blue-50">
+        <span class="text-3xl">🇮🇱</span>
+        <div><div class="font-bold text-gray-800">מותאם לשוק הישראלי</div><div class="text-sm text-gray-500">ממשק עברית, תמחור בשקלים, תמיכה מקומית</div></div>
+      </div>
+      <div class="flex items-center gap-3 p-4 rounded-xl bg-amber-50">
+        <span class="text-3xl">🔍</span>
+        <div><div class="font-bold text-gray-800">ניטרלי לחלוטין</div><div class="text-sm text-gray-500">אנחנו לא מוכרים כלים — רק מדרגים</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools" class="max-w-6xl mx-auto px-4 py-16">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="text-3xl font-black text-navy">כלים מובילים</h2>
+        <p class="text-gray-500 mt-1">מדורגים לפי ממוצע ביקורות מאומתות</p>
+      </div>
+      <a href="#" class="text-trust font-semibold hover:underline hidden sm:block">כל הכלים ←</a>
+    </div>
+    <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="skeleton h-64 rounded-2xl"></div>
+      <div class="skeleton h-64 rounded-2xl"></div>
+      <div class="skeleton h-64 rounded-2xl"></div>
+    </div>
+    <div id="error-msg" class="hidden text-center py-16 text-gray-400">
+      <div class="text-5xl mb-4">😔</div>
+      <p class="text-lg font-semibold text-gray-600">לא הצלחנו לטעון את הכלים כרגע</p>
+      <p class="text-sm mt-1" id="error-detail"></p>
+      <button onclick="loadFeaturedTools()" class="mt-4 bg-trust text-white px-6 py-2 rounded-lg hover:bg-sky-400 transition-colors">נסה שוב</button>
+    </div>
+  </section>
+
+  <footer class="bg-navy text-blue-300 text-sm">
+    <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2"><span>🏝️</span><span class="font-semibold text-white">אי של אמון</span><span class="text-blue-500">|</span><span>כלי AI לעסקים ישראליים</span></div>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-white transition-colors">אודות</a>
+        <a href="#" class="hover:text-white transition-colors">פרטיות</a>
+        <a href="#" class="hover:text-white transition-colors">צור קשר</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE = "http://localhost:8000"; // ← שנה ל-Railway URL לאחר deploy
+
+    const PRICING_LABELS = {
+      free:         { label: "חינם",          class: "bg-green-100 text-green-700" },
+      freemium:     { label: "פרימיום חינמי", class: "bg-blue-100 text-blue-700" },
+      subscription: { label: "מנוי חודשי",    class: "bg-amber-100 text-amber-700" },
+      pay_per_use:  { label: "לפי שימוש",     class: "bg-purple-100 text-purple-700" },
+      enterprise:   { label: "Enterprise",    class: "bg-gray-100 text-gray-700" },
+    };
+
+    const ICON_COLORS = ["bg-blue-600","bg-purple-600","bg-green-600","bg-orange-600","bg-pink-600","bg-teal-600"];
+
+    function renderStars(rating) {
+      const full = Math.floor(rating), empty = 5 - full;
+      return `<span style="color:#f59e0b">${"★".repeat(full)}</span><span style="color:#d1d5db">${"★".repeat(empty)}</span>`;
+    }
+
+    function escHtml(str = "") {
+      return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    }
+
+    function buildToolCard(tool) {
+      const pricing = PRICING_LABELS[tool.pricing_model] ?? PRICING_LABELS.freemium;
+      const color   = ICON_COLORS[tool.name.charCodeAt(0) % ICON_COLORS.length];
+      const waMsg   = encodeURIComponent(`בדק את ${tool.name} באי של אמון: ${tool.share_url}`);
+
+      return `
+        <article class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col gap-4 card-hover">
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-lg text-navy leading-tight truncate">${escHtml(tool.name)}</h3>
+              <p class="text-sm text-gray-500 mt-0.5">
+                ${escHtml(tool.vendor?.company_name_he ?? tool.vendor?.company_name ?? "")}
+                ${tool.vendor?.is_verified ? '<span class="text-blue-500 text-base" title="ספק מאומת">✓</span>' : ""}
+              </p>
+            </div>
+            <div class="w-10 h-10 ${color} rounded-xl flex items-center justify-center text-white font-bold flex-shrink-0">${escHtml(tool.name.charAt(0))}</div>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed flex-1 line-clamp-2">${escHtml(tool.tagline_he ?? tool.tagline_en ?? "")}</p>
+          <div class="flex items-center gap-2">
+            ${renderStars(tool.avg_rating)}
+            <span class="text-sm font-bold text-gray-700">${tool.avg_rating.toFixed(1)}</span>
+            <span class="text-sm text-gray-400">(${tool.review_count} ביקורות)</span>
+          </div>
+          <div class="flex flex-wrap gap-2 text-xs font-semibold">
+            <span class="px-2.5 py-1 rounded-full ${pricing.class}">${pricing.label}</span>
+            ${tool.hebrew_interface ? '<span class="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700">🇮🇱 ממשק עברית</span>' : ""}
+            ${tool.data_stored_in_israel ? '<span class="px-2.5 py-1 rounded-full bg-green-50 text-green-700">🔒 נתונים בישראל</span>' : ""}
+          </div>
+          <div class="flex gap-2 pt-2 border-t border-gray-100">
+            <a href="tool.html?id=${tool.id}" class="flex-1 text-center bg-navy hover:bg-navy-light text-white text-sm font-semibold py-2.5 rounded-xl transition-colors">קרא ביקורות</a>
+            <a href="https://wa.me/?text=${encodeURIComponent(`${tool.name} | אי של אמון: ${tool.share_url}`)}" target="_blank" rel="noopener"
+               class="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold px-3.5 rounded-xl transition-colors flex items-center justify-center">📲</a>
+          </div>
+        </article>`;
+    }
+
+    async function loadFeaturedTools() {
+      const grid = document.getElementById("tools-grid");
+      const err  = document.getElementById("error-msg");
+      grid.innerHTML = Array(3).fill('<div class="skeleton h-64 rounded-2xl"></div>').join("");
+      err.classList.add("hidden");
+      try {
+        const res = await fetch(`${API_BASE}/api/v1/tools/featured`, {
+          headers: { "Accept": "application/json" },
+          signal: AbortSignal.timeout(8000),
+        });
+        if (!res.ok) throw new Error(`שגיאת שרת: ${res.status}`);
+        const tools = await res.json();
+        if (!tools.length) {
+          grid.innerHTML = '<div class="col-span-3 text-center py-16 text-gray-400"><div class="text-5xl mb-4">📭</div><p class="text-lg">עדיין אין כלים להצגה</p></div>';
+          return;
+        }
+        grid.innerHTML = tools.map(buildToolCard).join("");
+      } catch (e) {
+        grid.innerHTML = "";
+        err.classList.remove("hidden");
+        document.getElementById("error-detail").textContent = e.name === "TimeoutError" ? "הבקשה לשרת לקחה יותר מדי זמן. ודא שה-Backend פועל." : e.message;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadFeaturedTools);
+  </script>
+</body>
+</html>

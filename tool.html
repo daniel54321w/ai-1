@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>אי של אמון — פרטי כלי</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Heebo', 'sans-serif'] },
+          colors: {
+            navy:  { DEFAULT:'#0f2547', light:'#1a3a6e', muted:'#3d5a8a' },
+            trust: { DEFAULT:'#0ea5e9', light:'#e0f2fe' },
+            gold:  { DEFAULT:'#f59e0b', light:'#fef3c7' },
+            sage:  { DEFAULT:'#10b981', light:'#d1fae5' },
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+  <style>
+    body { font-family: 'Heebo', sans-serif; }
+    .star-btn { cursor:pointer; transition:transform .1s; font-size:2rem; }
+    .star-btn:hover, .star-btn.active { transform:scale(1.2); }
+    .star-filled { color:#f59e0b; }
+    .star-empty  { color:#d1d5db; }
+    .form-input { width:100%; border:1.5px solid #e5e7eb; border-radius:.75rem; padding:.75rem 1rem; font-family:'Heebo',sans-serif; font-size:.95rem; transition:border-color .2s, box-shadow .2s; background:white; direction:rtl; }
+    .form-input:focus { outline:none; border-color:#0ea5e9; box-shadow:0 0 0 3px rgba(14,165,233,.12); }
+    .form-label { font-weight:600; font-size:.875rem; color:#374151; margin-bottom:.4rem; display:block; }
+    .form-hint  { font-size:.78rem; color:#6b7280; margin-top:.3rem; }
+    .skeleton { background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%); background-size:200% 100%; animation:shimmer 1.4s infinite; border-radius:.75rem; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .upload-zone { border:2px dashed #d1d5db; border-radius:1rem; padding:1.5rem; text-align:center; transition:border-color .2s, background .2s; }
+    .upload-zone.success { border-color:#10b981; background:#f0fdf4; }
+    .upload-zone.error   { border-color:#ef4444; background:#fef2f2; }
+  </style>
+</head>
+<body class="bg-slate-50 text-gray-800 antialiased">
+
+  <nav class="bg-navy text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2"><span class="text-xl">🏝️</span><span class="font-bold text-lg">אי של אמון</span></a>
+      <a href="index.html" class="text-sm text-blue-300 hover:text-white transition-colors">← חזרה לכל הכלים</a>
+    </div>
+  </nav>
+
+  <div id="tool-header-skeleton" class="bg-white border-b border-gray-100 py-10 px-4">
+    <div class="max-w-5xl mx-auto flex flex-col gap-4">
+      <div class="skeleton h-8 w-64 mb-2"></div>
+      <div class="skeleton h-5 w-48"></div>
+      <div class="skeleton h-4 w-80"></div>
+      <div class="flex gap-2 mt-2"><div class="skeleton h-7 w-24 rounded-full"></div><div class="skeleton h-7 w-24 rounded-full"></div></div>
+    </div>
+  </div>
+
+  <div id="tool-header" class="hidden bg-white border-b border-gray-100 py-10 px-4">
+    <div class="max-w-5xl mx-auto">
+      <p class="text-sm text-gray-400 mb-4"><a href="index.html" class="hover:text-trust">כלים מובילים</a> › <span id="hdr-category">שיווק</span></p>
+      <div class="flex flex-col sm:flex-row sm:items-start gap-6">
+        <div id="hdr-icon" class="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-3xl font-black flex-shrink-0 bg-navy">?</div>
+        <div class="flex-1">
+          <div class="flex flex-wrap items-center gap-3 mb-1">
+            <h1 id="hdr-name" class="text-3xl font-black text-navy"></h1>
+            <span id="hdr-verified" class="hidden text-xs bg-trust-light text-trust font-bold px-3 py-1 rounded-full">✓ ספק מאומת</span>
+          </div>
+          <p id="hdr-vendor" class="text-gray-500 font-medium mb-3"></p>
+          <p id="hdr-tagline" class="text-gray-700 text-lg leading-relaxed mb-4"></p>
+          <div class="flex items-center gap-3 mb-4">
+            <div id="hdr-stars" class="text-xl"></div>
+            <span id="hdr-rating" class="font-bold text-gray-800"></span>
+            <span id="hdr-count" class="text-gray-400 text-sm"></span>
+          </div>
+          <div id="hdr-tags" class="flex flex-wrap gap-2 mb-5"></div>
+          <div class="flex flex-wrap gap-3">
+            <a id="hdr-website" href="#" target="_blank" rel="noopener" class="bg-navy hover:bg-navy-light text-white font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm">לאתר הכלי ↗</a>
+            <button onclick="shareWhatsApp()" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm">📲 שתף בוואטסאפ</button>
+            <a href="#review-form" class="border-2 border-navy text-navy hover:bg-navy hover:text-white font-semibold px-5 py-2.5 rounded-xl transition-colors text-sm">כתוב ביקורת ↓</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-5xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
+    <div class="lg:col-span-2 flex flex-col gap-10">
+
+      <section>
+        <h2 class="text-2xl font-black text-navy mb-6 flex items-center gap-2">
+          ביקורות מאומתות
+          <span id="review-count-badge" class="bg-trust-light text-trust text-sm font-bold px-2.5 py-0.5 rounded-full"></span>
+        </h2>
+        <div id="reviews-skeleton" class="flex flex-col gap-4"><div class="skeleton h-32"></div><div class="skeleton h-32"></div></div>
+        <div id="reviews-list" class="hidden flex flex-col gap-4"></div>
+        <div id="reviews-empty" class="hidden text-center py-10 text-gray-400">
+          <div class="text-4xl mb-3">💬</div>
+          <p class="font-semibold text-gray-500">עדיין אין ביקורות מאומתות לכלי זה</p>
+          <p class="text-sm mt-1">היה הראשון לכתוב!</p>
+        </div>
+      </section>
+
+      <section id="review-form" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
+        <h2 class="text-2xl font-black text-navy mb-2">כתוב ביקורת</h2>
+        <p class="text-gray-500 text-sm mb-6">כל ביקורת עוברת אימות ידני לפני פרסום. תודה על הכנות!</p>
+
+        <form id="form" novalidate class="flex flex-col gap-6" onsubmit="handleSubmit(event)">
+          <div>
+            <label class="form-label">דירוג <span class="text-red-500">*</span></label>
+            <div class="flex gap-1" id="star-picker" role="radiogroup">
+              <button type="button" class="star-btn star-empty" data-value="1" aria-label="כוכב 1">★</button>
+              <button type="button" class="star-btn star-empty" data-value="2" aria-label="כוכב 2">★</button>
+              <button type="button" class="star-btn star-empty" data-value="3" aria-label="כוכב 3">★</button>
+              <button type="button" class="star-btn star-empty" data-value="4" aria-label="כוכב 4">★</button>
+              <button type="button" class="star-btn star-empty" data-value="5" aria-label="כוכב 5">★</button>
+            </div>
+            <input type="hidden" id="rating" name="rating" value="" />
+            <p id="rating-error" class="hidden text-red-500 text-xs mt-1">יש לבחור דירוג</p>
+          </div>
+
+          <div>
+            <label class="form-label" for="title">כותרת ביקורת <span class="text-gray-400 font-normal">(אופציונלי)</span></label>
+            <input type="text" id="title" name="title" maxlength="300" placeholder="למשל: חסך לי שעות של עבודה בשבוע" class="form-input" />
+          </div>
+
+          <div>
+            <label class="form-label" for="body">הביקורת שלך <span class="text-red-500">*</span></label>
+            <textarea id="body" name="body" rows="5" minlength="50" maxlength="5000"
+              placeholder="ספר על החוויה שלך. מה פתר הכלי? מה היה מאתגר? (מינימום 50 תווים)"
+              class="form-input resize-none"
+              oninput="updateCharCount(); checkValidity()"></textarea>
+            <div class="flex justify-between items-center mt-1">
+              <p id="body-error" class="hidden text-red-500 text-xs">מינימום 50 תווים</p>
+              <p id="body-count" class="text-xs text-gray-400 mr-auto">0 / 5000</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="form-label" for="pros">✅ יתרונות <span class="text-gray-400 font-normal">(אופציונלי)</span></label>
+              <textarea id="pros" name="pros" rows="3" placeholder="מה אהבת?" class="form-input resize-none"></textarea>
+            </div>
+            <div>
+              <label class="form-label" for="cons">❌ חסרונות <span class="text-gray-400 font-normal">(אופציונלי)</span></label>
+              <textarea id="cons" name="cons" rows="3" placeholder="מה פחות עבד?" class="form-input resize-none"></textarea>
+            </div>
+          </div>
+
+          <div>
+            <label class="form-label" for="linkedin">פרופיל LinkedIn <span class="text-red-500">*</span></label>
+            <input type="url" id="linkedin" name="linkedin_profile_url"
+              placeholder="https://www.linkedin.com/in/your-name/"
+              class="form-input" oninput="checkValidity()" />
+            <p class="form-hint">נדרש לאימות זהות. הפרופיל יוצג ליד הביקורת שלך.</p>
+            <p id="linkedin-error" class="hidden text-red-500 text-xs mt-1">כתובת LinkedIn אינה תקינה</p>
+          </div>
+
+          <div>
+            <label class="form-label">הוכחת שימוש — צילום מסך <span class="text-red-500">*</span></label>
+            <div id="upload-zone" class="upload-zone">
+              <div id="upload-initial">
+                <div class="text-4xl mb-2">📸</div>
+                <p class="font-semibold text-gray-700 mb-1">העלה צילום מסך של הכלי בשימוש</p>
+                <p class="text-sm text-gray-500 mb-4">לדוגמה: אזור האישי שלך, דוח שייצר הכלי, או כל הוכחה שאתה משתמש בו.</p>
+                <button type="button" onclick="openCloudinaryWidget()" class="bg-navy hover:bg-navy-light text-white font-semibold px-6 py-2.5 rounded-xl transition-colors text-sm">בחר תמונה להעלאה</button>
+                <p class="text-xs text-gray-400 mt-3">PNG, JPG, WEBP · עד 5MB</p>
+              </div>
+              <div id="upload-success" class="hidden">
+                <div class="text-4xl mb-2">✅</div>
+                <p class="font-bold text-green-700 text-lg mb-1">הצילום הועלה בהצלחה!</p>
+                <img id="upload-preview" src="" alt="תצוגה מקדימה" class="w-full max-h-40 object-contain rounded-lg border border-green-200 mt-3 mb-3" />
+                <button type="button" onclick="openCloudinaryWidget()" class="text-sm text-gray-500 hover:text-trust underline">החלף תמונה</button>
+              </div>
+              <div id="upload-error" class="hidden">
+                <div class="text-4xl mb-2">⚠️</div>
+                <p class="font-semibold text-red-600 mb-2">ההעלאה נכשלה</p>
+                <p id="upload-error-msg" class="text-sm text-red-500 mb-3"></p>
+                <button type="button" onclick="openCloudinaryWidget()" class="bg-red-100 hover:bg-red-200 text-red-700 font-semibold px-5 py-2 rounded-xl text-sm transition-colors">נסה שנית</button>
+              </div>
+            </div>
+            <input type="hidden" id="screenshot_proof_url" name="screenshot_proof_url" value="" />
+          </div>
+
+          <div class="pt-2 border-t border-gray-100">
+            <div id="form-checklist" class="grid grid-cols-2 gap-1.5 text-xs mb-4">
+              <div id="chk-rating"     class="text-gray-400">○ דירוג</div>
+              <div id="chk-body"       class="text-gray-400">○ טקסט ביקורת (50+ תווים)</div>
+              <div id="chk-linkedin"   class="text-gray-400">○ פרופיל LinkedIn תקין</div>
+              <div id="chk-screenshot" class="text-gray-400">○ צילום מסך הועלה</div>
+            </div>
+            <button type="submit" id="submit-btn" disabled
+              class="w-full bg-gray-200 text-gray-400 font-bold py-4 rounded-xl text-lg cursor-not-allowed transition-all duration-300">
+              שלח ביקורת לאישור
+            </button>
+            <p class="text-center text-xs text-gray-400 mt-2">הביקורת תועבר לאישור מנהל לפני פרסום. זמן ממוצע: 24 שעות.</p>
+          </div>
+        </form>
+
+        <div id="form-success" class="hidden text-center py-8">
+          <div class="text-5xl mb-4">🎉</div>
+          <h3 class="text-2xl font-black text-navy mb-2">תודה על הביקורת!</h3>
+          <p class="text-gray-500 mb-6">קיבלנו את הביקורת שלך. היא תפורסם לאחר אימות על ידי הצוות שלנו.</p>
+          <a href="index.html" class="inline-block bg-navy text-white font-semibold px-6 py-3 rounded-xl hover:bg-navy-light transition-colors">חזרה לדף הבית</a>
+        </div>
+      </section>
+    </div>
+
+    <aside class="flex flex-col gap-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h3 class="font-bold text-navy mb-4">פרטים מהירים</h3>
+        <dl id="sidebar-details" class="flex flex-col gap-3 text-sm"></dl>
+      </div>
+      <div class="bg-trust-light rounded-2xl p-5 text-sm">
+        <h3 class="font-bold text-navy mb-3">למה לסמוך על הביקורות?</h3>
+        <ul class="flex flex-col gap-2 text-gray-700">
+          <li class="flex gap-2">✅ <span>כל ביקורת מאומתת ידנית</span></li>
+          <li class="flex gap-2">📎 <span>הוכחת שימוש חובה</span></li>
+          <li class="flex gap-2">🔗 <span>LinkedIn אמיתי חובה</span></li>
+          <li class="flex gap-2">🚫 <span>אפס ביקורות ממומנות</span></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="bg-navy text-blue-300 text-sm mt-8">
+    <div class="max-w-5xl mx-auto px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2"><span>🏝️</span><span class="font-semibold text-white">אי של אמון</span></div>
+      <div class="flex gap-4"><a href="index.html" class="hover:text-white transition-colors">דף הבית</a><a href="#" class="hover:text-white transition-colors">פרטיות</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE = "http://localhost:8000"; // ← שנה ל-Railway URL לאחר deploy
+
+    const CLOUDINARY_CLOUD_NAME    = "YOUR_CLOUD_NAME";    // ← מ-Cloudinary Dashboard
+    const CLOUDINARY_UPLOAD_PRESET = "YOUR_UPLOAD_PRESET"; // ← Unsigned preset
+
+    const LINKEDIN_RE  = /^https:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9\-_%]+\/?$/;
+    const ICON_COLORS  = ["bg-blue-600","bg-purple-600","bg-green-600","bg-orange-600","bg-pink-600","bg-teal-600"];
+    const PRICING_LABELS = { free:"חינם", freemium:"פרימיום חינמי", subscription:"מנוי חודשי", pay_per_use:"לפי שימוש", enterprise:"Enterprise" };
+
+    let currentToolId = null, currentShortUrl = null;
+    let selectedRating = 0, screenshotUrl = "", cloudinaryWidget = null;
+
+    const params = new URLSearchParams(window.location.search);
+    currentToolId = params.get("id");
+
+    if (!currentToolId) {
+      document.body.innerHTML = `<div class="min-h-screen flex items-center justify-center text-center p-8"><div><div class="text-6xl mb-4">🔍</div><h1 class="text-2xl font-bold text-gray-700 mb-2">לא נמצא מזהה כלי</h1><p class="text-gray-500 mb-4">חזור לדף הבית ובחר כלי.</p><a href="index.html" class="bg-navy text-white px-6 py-3 rounded-xl">דף הבית</a></div></div>`;
+    } else {
+      document.addEventListener("DOMContentLoaded", init);
+    }
+
+    async function init() {
+      setupStarPicker();
+      initCloudinaryWidget();
+      await Promise.all([loadToolDetails(), loadReviews()]);
+    }
+
+    async function loadToolDetails() {
+      try {
+        const res  = await fetch(`${API_BASE}/api/v1/tools/${currentToolId}`);
+        if (!res.ok) throw new Error(res.status);
+        const tool = await res.json();
+        renderToolHeader(tool);
+        renderSidebar(tool);
+      } catch (e) {
+        document.getElementById("tool-header-skeleton").innerHTML = `<div class="max-w-5xl mx-auto px-4 py-12 text-center text-gray-400"><div class="text-4xl mb-3">⚠️</div><p class="font-semibold">לא ניתן לטעון את פרטי הכלי</p></div>`;
+      }
+    }
+
+    function renderToolHeader(tool) {
+      currentShortUrl = tool.share_url;
+      const color = ICON_COLORS[tool.name.charCodeAt(0) % ICON_COLORS.length];
+      document.title = `${tool.name} — אי של אמון`;
+      document.getElementById("hdr-icon").className = `w-16 h-16 rounded-2xl flex items-center justify-center text-white text-3xl font-black flex-shrink-0 ${color}`;
+      document.getElementById("hdr-icon").textContent    = tool.name.charAt(0);
+      document.getElementById("hdr-name").textContent    = tool.name;
+      document.getElementById("hdr-vendor").textContent  = tool.vendor?.company_name_he ?? tool.vendor?.company_name ?? "";
+      document.getElementById("hdr-tagline").textContent = tool.tagline_he ?? tool.tagline_en ?? "";
+      document.getElementById("hdr-stars").innerHTML     = renderStars(tool.avg_rating);
+      document.getElementById("hdr-rating").textContent  = tool.avg_rating.toFixed(1);
+      document.getElementById("hdr-count").textContent   = `(${tool.review_count} ביקורות)`;
+      document.getElementById("hdr-website").href        = tool.vendor?.website_url ?? "#";
+      if (tool.vendor?.is_verified) document.getElementById("hdr-verified").classList.remove("hidden");
+      const tags = [
+        { show: true,                       cls:"bg-blue-50 text-blue-700",   txt: PRICING_LABELS[tool.pricing_model] ?? tool.pricing_model },
+        { show: tool.hebrew_interface,      cls:"bg-trust-light text-trust",  txt:"🇮🇱 ממשק עברית" },
+        { show: tool.data_stored_in_israel, cls:"bg-green-50 text-green-700", txt:"🔒 נתונים בישראל" },
+        { show: tool.gdpr_compliant,        cls:"bg-purple-50 text-purple-700", txt:"✓ GDPR" },
+      ];
+      document.getElementById("hdr-tags").innerHTML = tags.filter(t=>t.show).map(t=>`<span class="text-xs font-semibold px-3 py-1.5 rounded-full ${t.cls}">${t.txt}</span>`).join("");
+      document.getElementById("tool-header-skeleton").classList.add("hidden");
+      document.getElementById("tool-header").classList.remove("hidden");
+    }
+
+    function renderSidebar(tool) {
+      const price = tool.price_starting_usd ? `החל מ-$${tool.price_starting_usd} / חודש` : "חינם";
+      const rows = [["💰 תמחור",price],["🌐 ממשק עברית",tool.hebrew_interface?"כן ✓":"לא"],["🔒 נתונים בישראל",tool.data_stored_in_israel?"כן ✓":"לא"],["📋 GDPR",tool.gdpr_compliant?"עומד ✓":"לא מצוין"]];
+      document.getElementById("sidebar-details").innerHTML = rows.map(([k,v])=>`<div class="flex justify-between items-center pb-2 border-b border-gray-50 last:border-0"><dt class="text-gray-500">${k}</dt><dd class="font-semibold text-gray-800">${v}</dd></div>`).join("");
+    }
+
+    async function loadReviews() {
+      try {
+        const res     = await fetch(`${API_BASE}/api/v1/reviews/tool/${currentToolId}`);
+        if (!res.ok) throw new Error(res.status);
+        const reviews = await res.json();
+        document.getElementById("reviews-skeleton").classList.add("hidden");
+        if (!reviews.length) { document.getElementById("reviews-empty").classList.remove("hidden"); return; }
+        document.getElementById("review-count-badge").textContent = reviews.length;
+        document.getElementById("reviews-list").innerHTML = reviews.map(buildReviewCard).join("");
+        document.getElementById("reviews-list").classList.remove("hidden");
+      } catch (e) {
+        document.getElementById("reviews-skeleton").innerHTML = `<div class="text-center py-8 text-gray-400"><p>לא ניתן לטעון ביקורות.</p></div>`;
+      }
+    }
+
+    function buildReviewCard(r) {
+      const date = new Intl.DateTimeFormat("he-IL",{year:"numeric",month:"long",day:"numeric"}).format(new Date(r.created_at));
+      return `<article class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+        <div class="flex items-start justify-between mb-3">
+          <div>
+            <div class="font-bold text-gray-800 text-lg">${escHtml(r.title ?? "ביקורת מאומתת")}</div>
+            <div class="flex items-center gap-2 mt-1"><span>${renderStars(r.rating)}</span><span class="text-xs text-gray-400">${date}</span></div>
+          </div>
+          <a href="${escHtml(r.linkedin_profile_url)}" target="_blank" rel="noopener" title="פרופיל LinkedIn" class="text-blue-600 hover:text-blue-800 text-lg">🔗</a>
+        </div>
+        <p class="text-gray-700 leading-relaxed mb-4">${escHtml(r.body)}</p>
+        ${r.pros||r.cons?`<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">${r.pros?`<div class="bg-green-50 rounded-xl p-3"><div class="font-semibold text-green-700 mb-1">✅ יתרונות</div><p class="text-gray-700">${escHtml(r.pros)}</p></div>`:""}${r.cons?`<div class="bg-red-50 rounded-xl p-3"><div class="font-semibold text-red-700 mb-1">❌ חסרונות</div><p class="text-gray-700">${escHtml(r.cons)}</p></div>`:""}</div>`:""}
+        <div class="mt-3 pt-3 border-t border-gray-50 flex items-center gap-2 text-xs text-gray-400">
+          <span class="bg-green-100 text-green-700 font-semibold px-2 py-0.5 rounded-full">✓ מאומת</span>
+          <span>${escHtml(r.author_name ?? "משתמש מאומת")}</span>
+        </div>
+      </article>`;
+    }
+
+    function setupStarPicker() {
+      document.querySelectorAll(".star-btn").forEach(star => {
+        star.addEventListener("click", () => {
+          selectedRating = parseInt(star.dataset.value);
+          document.getElementById("rating").value = selectedRating;
+          updateStarDisplay(selectedRating);
+          checkValidity();
+        });
+        star.addEventListener("mouseenter", () => updateStarDisplay(parseInt(star.dataset.value), true));
+        star.addEventListener("mouseleave", () => updateStarDisplay(selectedRating));
+      });
+    }
+
+    function updateStarDisplay(count, preview = false) {
+      document.querySelectorAll(".star-btn").forEach((s, i) => {
+        s.classList.toggle("star-filled", i < count);
+        s.classList.toggle("star-empty",  i >= count);
+        s.classList.toggle("active",       i < count && !preview);
+      });
+    }
+
+    function initCloudinaryWidget() {
+      cloudinaryWidget = cloudinary.createUploadWidget(
+        { cloudName: CLOUDINARY_CLOUD_NAME, uploadPreset: CLOUDINARY_UPLOAD_PRESET, sources: ["local","camera"], multiple: false, maxFiles: 1, maxFileSize: 5_000_000, acceptedFiles: ".png,.jpg,.jpeg,.webp", folder: "proof_screenshots", singleUploadAutoClose: true },
+        (error, result) => {
+          if (error) { setUploadState("error", error.message ?? "שגיאה לא ידועה"); return; }
+          if (result?.event === "success") {
+            screenshotUrl = result.info.secure_url;
+            document.getElementById("screenshot_proof_url").value = screenshotUrl;
+            document.getElementById("upload-preview").src = screenshotUrl;
+            setUploadState("success");
+            checkValidity();
+          }
+        }
+      );
+    }
+
+    function openCloudinaryWidget() { cloudinaryWidget?.open(); }
+
+    function setUploadState(state, errorMsg = "") {
+      const zone = document.getElementById("upload-zone");
+      ["upload-initial","upload-success","upload-error"].forEach(id => document.getElementById(id).classList.add("hidden"));
+      zone.classList.remove("success","error");
+      if (state === "success") { document.getElementById("upload-success").classList.remove("hidden"); zone.classList.add("success"); }
+      else if (state === "error") { document.getElementById("upload-error").classList.remove("hidden"); document.getElementById("upload-error-msg").textContent = errorMsg; zone.classList.add("error"); screenshotUrl = ""; document.getElementById("screenshot_proof_url").value = ""; }
+    }
+
+    function checkValidity() {
+      const body     = document.getElementById("body").value.trim();
+      const linkedin = document.getElementById("linkedin").value.trim();
+      const ok = { rating: selectedRating > 0, body: body.length >= 50, linkedin: LINKEDIN_RE.test(linkedin), screenshot: screenshotUrl !== "" };
+      setCheck("chk-rating",     ok.rating,     "דירוג");
+      setCheck("chk-body",       ok.body,       `טקסט ביקורת (${body.length}/50+ תווים)`);
+      setCheck("chk-linkedin",   ok.linkedin,   "פרופיל LinkedIn תקין");
+      setCheck("chk-screenshot", ok.screenshot, "צילום מסך הועלה");
+      document.getElementById("linkedin-error").classList.toggle("hidden", !linkedin || ok.linkedin);
+      const allOk = Object.values(ok).every(Boolean);
+      const btn = document.getElementById("submit-btn");
+      btn.disabled = !allOk;
+      btn.className = allOk
+        ? "w-full bg-navy hover:bg-navy-light text-white font-bold py-4 rounded-xl text-lg cursor-pointer transition-all duration-300"
+        : "w-full bg-gray-200 text-gray-400 font-bold py-4 rounded-xl text-lg cursor-not-allowed transition-all duration-300";
+    }
+
+    function setCheck(id, ok, label) {
+      const el = document.getElementById(id);
+      el.textContent = (ok ? "✅ " : "○ ") + label;
+      el.className   = ok ? "text-green-600 font-semibold text-xs" : "text-gray-400 text-xs";
+    }
+
+    function updateCharCount() {
+      const len = document.getElementById("body").value.length;
+      document.getElementById("body-count").textContent = `${len} / 5000`;
+      document.getElementById("body-error").classList.toggle("hidden", len === 0 || len >= 50);
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById("submit-btn");
+      btn.disabled = true; btn.textContent = "שולח...";
+      const payload = {
+        tool_id: currentToolId, rating: selectedRating,
+        title: document.getElementById("title").value.trim() || null,
+        body:  document.getElementById("body").value.trim(),
+        pros:  document.getElementById("pros").value.trim()  || null,
+        cons:  document.getElementById("cons").value.trim()  || null,
+        linkedin_profile_url: document.getElementById("linkedin").value.trim(),
+        screenshot_proof_url: screenshotUrl,
+      };
+      try {
+        const res = await fetch(`${API_BASE}/api/v1/reviews/`, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(payload) });
+        if (!res.ok) { const err = await res.json().catch(()=>({})); throw new Error(err.detail ?? `שגיאת שרת: ${res.status}`); }
+        document.getElementById("form").classList.add("hidden");
+        document.getElementById("form-success").classList.remove("hidden");
+        document.getElementById("form-success").scrollIntoView({behavior:"smooth"});
+      } catch (err) {
+        btn.disabled = false; btn.textContent = "שלח ביקורת לאישור";
+        const msg = document.createElement("div");
+        msg.className = "mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm";
+        msg.textContent = `שגיאה בשליחה: ${err.message}`;
+        document.getElementById("form").appendChild(msg);
+        setTimeout(() => msg.remove(), 6000);
+      }
+    }
+
+    function shareWhatsApp() {
+      const url  = currentShortUrl ?? window.location.href;
+      const name = document.getElementById("hdr-name")?.textContent ?? "כלי AI";
+      window.open(`https://wa.me/?text=${encodeURIComponent(`בדקתי את "${name}" באי של אמון: ${url}`)}`, "_blank");
+    }
+
+    function escHtml(str="") { return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+    function renderStars(rating) { const full=Math.floor(rating),empty=5-full; return `<span style="color:#f59e0b">${"★".repeat(full)}</span><span style="color:#d1d5db">${"★".repeat(empty)}</span>`; }
+  </script>
+</body>
+</html>
