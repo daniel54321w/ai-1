@@ -23,7 +23,10 @@ class Review(Base):
     tool: Mapped["AITool"] = relationship(back_populates="reviews")
 
     user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    author: Mapped["User"] = relationship(back_populates="reviews")
+    author: Mapped["User"] = relationship(
+        back_populates="reviews",
+        foreign_keys=[user_id],
+    )
 
     rating: Mapped[int] = mapped_column(Integer, nullable=False)
     title: Mapped[str | None] = mapped_column(String(300))

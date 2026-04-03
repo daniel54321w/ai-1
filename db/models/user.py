@@ -18,4 +18,8 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
-    reviews: Mapped[list["Review"]] = relationship(back_populates="author", lazy="selectin")
+    reviews: Mapped[list["Review"]] = relationship(
+        back_populates="author",
+        lazy="selectin",
+        foreign_keys="[Review.user_id]",
+    )
