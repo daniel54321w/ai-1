@@ -1,8 +1,7 @@
 {
   "cleanUrls": true,
+  "public": true,
   "rewrites": [
-    { "source": "/",           "destination": "/frontend/index.html" },
-    { "source": "/tool.html",  "destination": "/frontend/tool.html"  },
-    { "source": "/(.*)",       "destination": "/frontend/$1"          }
+    { "source": "/(.*)", "destination": "/frontend/$1" }
   ]
 }
